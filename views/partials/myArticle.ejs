@@ -1,0 +1,149 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Articles.css" />
+</head>
+
+<body>
+    <div class="countainer">
+
+        <img class="img" src="/img/background.jpeg" />
+
+        <div class="content">
+
+            <div class="title">
+                <a href="http://localhost:3000/:role/dashboard"> <button id="btn-see-my-articles"
+                        class="btn btn-primary">back
+                        dashboard</button></a>
+                <div class="msg-title">
+                    <h1>
+                        Welcome To Article Page
+                    </h1>
+                    <p style="display: none;">
+                        <%=msg%>
+                    </p>
+                </div>
+            </div>
+
+            <p style="display: none;">
+                <%= articles %>
+            </p>
+            <div class="articles">
+                <% for(var index=0;index < articles.length ;index++ ){ %>
+                    <div class="card">
+                        <img class="card-img-top" src="/img/<%=articles[index].image%>" alt="Card image cap">
+                        <div class="card-body">
+                            <h2 class="card-title">
+                                <%=articles[index].title %>
+                            </h2>
+                            <div class="summary">
+                                <p class="card-text">
+                                    <%= (articles[index].text).slice(0,100)%>
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <ul class="ul-identify list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h3>writer:</h3>
+                                <%=articles[index].writer %>
+
+                            </li>
+                            <li class="list-group-item">
+                                <h3> createdAt:</h3>
+                                <%=(articles[index].createdAt)%>
+                                    <%# .split(' ').splice(0,5).join(' ') %> 
+                            </li>
+
+                        </ul>
+
+
+                        <div class="d-btns" id="d-btn-article" idArticle="<%=articles[index]._id%>">
+
+                            <button class="btn-update-article btn btn-primary">Update</button>
+
+                            <form action="/:role/dashboard/articles/seeMine/detailsOneArticle"
+                                method="post">
+
+                                <input type="text" style="display: none;" value="<%=articles[index]._id%>"
+                                    name="idArticle">
+                                <button type="submit" id="seeMore-articles"
+                                    class="seeMore-articles btn btn-success">See More</button>
+                            </form>
+
+                            <form action="/:role/dashboard/articles/seeMine/delete" method="post">
+                                <input type="text" style="display: none;" value="<%=articles[index]._id%>"
+                                    name="idArticle">
+                                <button type="submit" id="btn-delete-articles"
+                                    class="btn-delete-articles btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
+
+            </div>
+
+            <form action="/:role/dashboard/articles/seeMine/update" method="post" role="form" enctype="multipart/form-data">
+                <div class="modal" id="modal-updateArticle">
+                    <div class="modal-body">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Update Article</h3>
+                                <button type="button"  class="close-update-article" data-bs-dismiss="modal"
+                                    aria-label="Close"> &#10006</button>
+                            </div>
+                            <input style="display: none;" id="idArticle" name="idArticle">
+                            <div class="modal-body-2">
+                                <div class="">
+
+                                    <label for="titleArticle">titleArticle:</label>
+
+                                    <input class="w-650px" type="text" id="titleArticle" name="titleArticle" placeholder="titleArticle">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="textArticle">textArticle:</label>
+                                    <textarea id="textArticle" name="textArticle" rows="12" cols="75">
+                                            </textarea>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="img-article">Image Of Article:</label>
+                                    <input type="file" id="imgArticle" name="imgUpdateArticle">
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script>
+    let msg = `<%= msg %>`;
+    if (msg) {
+        alert(msg)
+    };
+</script>
+
+</html>

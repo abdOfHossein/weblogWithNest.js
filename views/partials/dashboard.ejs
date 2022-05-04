@@ -1,0 +1,262 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+
+<body>
+    <div class="countainer-dashboard">
+
+        <img class="img" src="/img/background.jpeg" />
+
+        <div class="content-dashboard">
+
+
+            <h2>Wellcome to your page
+                <%= user.firstName %>
+            </h2>
+
+            <div class="d-info">
+
+                <div class="info">
+
+                    <div class="row-info">
+                        <h4>userName:</h4>
+                        <h4 class="position-right">
+                            <%= user.userName %>
+                        </h4>
+                    </div>
+                    <div class="row-info ">
+                        <h4>password:</h4>
+                        <h4 class="position-right">
+                            <%= user.password %>
+                        </h4>
+
+                    </div>
+
+                    <div class="row-info ">
+                        <h4>lastName:</h4>
+                        <h4 class="position-right">
+                            <%= user.lastName %>
+                        </h4>
+                    </div>
+                    <div class="row-info ">
+                        <h4>firstName:</h4>
+                        <h4 class="position-right">
+                            <%= user.firstName %>
+                        </h4>
+                    </div>
+                    <div class="row-info ">
+                        <h4>phoneNumber:</h4>
+
+
+                        <h4 class="position-right">
+                            <%= user.phoneNumber %>
+                        </h4>
+
+
+
+                    </div>
+                    <div class="row-info">
+
+                        <h4>gender:</h4>
+                        <h4 class="position-right">
+                            <%= user.gender %>
+                        </h4>
+
+                    </div>
+
+                </div>
+                <div class="two-btns">
+                    <button class="w-150px btn-update-userInfo w-105px btn btn-success">update</button>
+                    <form action='/:role/dashboard/delete' method="post">
+                        <input style="display: none;" value=" <%= user._id %>" name="idUser" />
+                        <button type="submit" class="w-150px btn-delete-user btn btn-danger">delete</button>
+                    </form>
+                </div>
+
+                <div class="d-avatar">
+                    <img class="avatar" src='/img/<%= srcImgUser%>' alt="avatar">
+                    <form action="/:role/dashboard/avatar/update" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="img-reg">put yor image</label>
+                            <input type="file" id="updateAvatar" name="updateAvatar">
+                        </div>
+                        <button type="submit" class="btn-avatar btn btn-success">Change My Avatar</button>
+                    </form>
+                </div>
+                <div class="d-btns">
+                    <a href="/:role/dashboard/articles/seeAll"> <button id="w-150px btn-see-my-articles"
+                            class="w-150px btn btn-primary">See Whole Articles</button></a>
+                    <form action="/logout" method="get">
+                        <button type="submit" class="w-150px btn-delete btn btn-warning">logout</button>
+                    </form>
+                    <a href="/:role/dashboard/articles/seeMine"> <button id="btn-see-my-articles"
+                            class="w-150px btn btn-primary">See My Articles</button></a>
+
+                    <button id="btn-creat-article"
+                        class="w-150px btn-creat-article btn btn-primary">creatArticle</button>
+                    <% if(user.role==='admin' ){%>
+                        <a href="/:role/dashboard/seeBloggers"> <button class="w-150px btn btn-primary">See All
+                                User</button></a>
+                        <a href="/:role/dashboard/seeComments"> <button class="w-150px btn btn-primary">See All
+                                Comments</button></a>
+
+                        <% } %>
+
+                </div>
+                <p style="display: none">
+
+                    <%= msg %>
+                </p>
+            </div>
+
+
+
+
+            <!-- update Info modal and form -->
+
+            <form action="/:role/dashboard/update" method="post">
+                <div class="modal" id="modal-update-userInfo">
+                    <div class="modal-body">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">update user info</h3>
+                                <button type="button" class="close-update-userInfo" data-bs-dismiss="modal"
+                                    aria-label="Close"> &#10006</button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="countainer-elem-update">
+
+                                    <label class="labels-update" for="userName">userName:</label>
+
+                                    <input class="input-update" value="<%= user.userName %>" type="text" id="userName"
+                                        name="userName" placeholder="userName">
+
+                                </div>
+                                <div class="countainer-elem-update">
+                                    <label class="labels-update" for="password">password:</label>
+                                    <input class="input-update" value="<%= user.password %>" type="password"
+                                        id="password" name="password" placeholder="Password">
+
+                                </div>
+
+                                <div class="countainer-elem-update">
+                                    <label class="labels-update" for="firstName">firstName:</label>
+                                    <input class="input-update" value="<%= user.firstName %>" type="text" id="firstName"
+                                        name="firstName" placeholder="firstName">
+
+                                </div>
+                                <div class="countainer-elem-update">
+                                    <label class="labels-update" for="lastName"> lastName:</label>
+                                    <input class="input-update" value="<%= user.lastName %>" type="text" id="lastName"
+                                        name="lastName" placeholder="lastName">
+
+                                </div>
+                                <div class="countainer-elem-update">
+                                    <label class="labels-update" for="phoneNumber">phoneNumber:</label>
+                                    <input class="input-update" value="0<%= user.phoneNumber %>" type="tel"
+                                        id="phoneNumber" name="phoneNumber" placeholder="e.x: 09151234567">
+                                </div>
+                                <div class="countainer-elem-update">
+
+                                    <h4 class="labels-update">gender:</h4>
+                                    <div class="input-update-gender">
+                                        <% if(user.gender=='male' ){ %>
+
+                                            <input class="form-check-input" type="radio" name="gender" id="male"
+                                                value="male" checked>
+                                            <label class="form-check-label" for="male">
+                                                male </label>
+                                            <input class="form-check-input" type="radio" name="gender" id="female"
+                                                value="female">
+                                            <label class="form-check-label" for="female">
+                                                female
+                                            </label>
+                                            <% }else{ %>
+                                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                                    value="male" checked>
+                                                <label class="form-check-label" for="male">
+                                                    male </label>
+                                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                                    value="female" checkedt>
+                                                <label class="form-check-label" for="female">
+                                                    female
+                                                </label>
+                                                <% } %>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <!-- creatNewArticle modal and form -->
+            <form action="/:role/dashboard/articles/creat" method="post" enctype="multipart/form-data" role="form">
+                <div class="modal" id="modal-creatArticle">
+                    <div class="modal-body">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Creat New Article</h3>
+                                <button type="button" id="close-creatArticle" class="close" data-bs-dismiss="modal"
+                                    aria-label="Close"> &#10006</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="">
+
+                                    <label for="titleArticle">titleArticle:</label>
+
+                                    <input class="w-650px" type="text" id="titleArticle" name="titleArticle"
+                                        placeholder="titleArticle">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="textArticle">textArticle:</label>
+                                    <textarea id="textArticle" name="textArticle" rows="12" cols="75">
+                                            </textarea>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="img-article">Image Of Article:</label>
+                                    <input type="file" id="imgArticle" name="imgCreatArticle">
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script>
+    let msg = `<%= msg %>`;
+    if (msg) {
+        alert(msg)
+    };
+</script>
+
+</html>
