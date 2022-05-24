@@ -1,29 +1,34 @@
-import { Entity,Column,PrimaryGeneratedColumn  } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
+export enum Gender {
+    'male',
+    'female',
+    'other'
+}
 @Entity()
-export class User{
+export class User {
 
     @PrimaryGeneratedColumn()
-    id:number
+    id: number
 
     @Column()
-    userName:string
-    
-    @Column()
-    password:number
+    userName: string
 
     @Column()
-    firstName:string
+    password: number
 
     @Column()
-    lastName:string
-
-    @Column({default:'male'})
-    gender:string
+    firstName: string
 
     @Column()
-    phoneNumber:number
+    lastName: string
 
     @Column()
-    isAdmin:boolean
+    gender: string
+
+    @Column()
+    phoneNumber: number
+
+    @Column({ default: false })
+    isAdmin: boolean
 }

@@ -6,13 +6,13 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
-  @Get('login')
+  @Get('login/page')
   @Render('loginPage')
   msg() {
     return { msg: '' }
   }
 
-  @Get('register')
+  @Get('register/page')
   @Render('registerPage')
   error() {
     return { error: '' }
