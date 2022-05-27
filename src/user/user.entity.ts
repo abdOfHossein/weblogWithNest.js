@@ -15,7 +15,7 @@ export class User {
     userName: string
 
     @Column()
-    password: number
+    password: string
 
     @Column()
     firstName: string
@@ -27,7 +27,7 @@ export class User {
     gender: string
 
     @Column()
-    phoneNumber: number
+    phoneNumber: string
 
     @Column({ default: false })
     isAdmin: boolean

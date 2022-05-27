@@ -2,7 +2,7 @@ import { Controller, Post, Get, Body, Res, UseInterceptors, Req } from '@nestjs/
 import { User } from './user.entity';
 import { UsersService } from './user.service';
 import { Response, Request, raw } from 'express';
-import { type } from 'os';
+
 
 @Controller('register/page/doing')
 export class UsersController {
@@ -11,18 +11,17 @@ export class UsersController {
 
     @Post()
     @UseInterceptors()
-    addUser(@Body() userInfo: User, @Req() req: Request, @Res() res: Response) {
-        const strData=userInfo.toString();
-        const arrData=strData.split('&');
-        const objData={};
-        for (const iterator of arrData) {
-            objData[iterator.split('=')[0]]=iterator.split('=')[1];
-    
-        }
-        console.log(objData); 
+    addUser(@Body() userInfo: User, @Res() res: Response){
+         console.log(userInfo);
+        return this.usersService.addUser(userInfo);
     
     }
-
+    @Get()
+    @UseInterceptors()
+    findAll(){
+        return this.usersService.findAll();
+    
+    }
 }
 
 
