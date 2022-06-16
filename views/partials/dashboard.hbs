@@ -18,7 +18,8 @@
 
 
             <h2>Wellcome to your page
-                <%= user.firstName %>
+                {{user.firstName}}
+               
             </h2>
 
             <div class="d-info">
@@ -28,13 +29,15 @@
                     <div class="row-info">
                         <h4>userName:</h4>
                         <h4 class="position-right">
-                            <%= user.userName %>
+                            {{ user.userName }}
+                            
                         </h4>
                     </div>
                     <div class="row-info ">
                         <h4>password:</h4>
                         <h4 class="position-right">
-                            <%= user.password %>
+                            {{user.password}}
+                           
                         </h4>
 
                     </div>
@@ -42,13 +45,15 @@
                     <div class="row-info ">
                         <h4>lastName:</h4>
                         <h4 class="position-right">
-                            <%= user.lastName %>
+                            {{user.lastName}}
+                           
                         </h4>
                     </div>
                     <div class="row-info ">
                         <h4>firstName:</h4>
                         <h4 class="position-right">
-                            <%= user.firstName %>
+                            {{user.firstName}}
+                          
                         </h4>
                     </div>
                     <div class="row-info ">
@@ -56,7 +61,8 @@
 
 
                         <h4 class="position-right">
-                            <%= user.phoneNumber %>
+                            {{user.phoneNumber}}
+                           
                         </h4>
 
 
@@ -66,7 +72,8 @@
 
                         <h4>gender:</h4>
                         <h4 class="position-right">
-                            <%= user.gender %>
+                            {{user.gender }}
+                           
                         </h4>
 
                     </div>
@@ -75,13 +82,13 @@
                 <div class="two-btns">
                     <button class="w-150px btn-update-userInfo w-105px btn btn-success">update</button>
                     <form action='/:role/dashboard/delete' method="post">
-                        <input style="display: none;" value=" <%= user._id %>" name="idUser" />
+                        <input style="display: none;" value="{{user._id }}" name="idUser" />
                         <button type="submit" class="w-150px btn-delete-user btn btn-danger">delete</button>
                     </form>
                 </div>
 
                 <div class="d-avatar">
-                    <img class="avatar" src='/img/<%= srcImgUser%>' alt="avatar">
+                    <img class="avatar" src='/img/{{ srcImgUser}}' alt="avatar">
                     <form action="/:role/dashboard/avatar/update" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="img-reg">put yor image</label>
@@ -112,7 +119,7 @@
                 </div>
                 <p style="display: none">
 
-                    <%= msg %>
+                   {{ msg}}
                 </p>
             </div>
 
@@ -253,10 +260,7 @@
 <script src="/js/main.js"></script>
 
 <script>
-    let msg = `<%= msg %>`;
-    if (msg) {
-        alert(msg)
-    };
+
 </script>
 
 </html>

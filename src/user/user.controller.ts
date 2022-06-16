@@ -26,14 +26,18 @@ export class UsersController {
     }
     @Post('login/page/doing')
     @UseInterceptors()
-    goDashboard(@Body() loginInfo: any, @Res() res: Response) {
+    async goDashboard(@Body() loginInfo: any, @Res() res: Response) {
 
-       const result= this.usersService.findOne(loginInfo);
-        console.log(loginInfo);
-        console.log(result);
-        
+        try {
+            const result = await this.usersService.findOne(loginInfo)
+            console.log(result);
+            return res.render('blogger/dashboard',{user:result,msg:'hello'})
 
+        } catch (error) {
 
+            console.log(`err of goDashboard in controller:${error}`);
+
+        }
 
     }
 }

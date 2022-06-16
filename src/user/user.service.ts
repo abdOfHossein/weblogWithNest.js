@@ -39,32 +39,19 @@ export class UsersService {
 
   async findOne(loginData: any): Promise<any> {
     try {
-      const strData = loginData.toString();
-      console.log(strData);
 
+      const strData = loginData.toString();
       const arrData = strData.split('&');
-      console.log(arrData);
       let userName = '';
       for (const iterator of arrData) {
 
         if (iterator.split('=')[0] === 'userName') {
-          console.log(iterator);
           userName = iterator.split('=')[1]
         }
 
-      }
-      console.log(userName);
-
-      const user: User = await this.usersRepository.findOne(userName);
-      const strData2 = user.toString();
-      console.log(strData2);
-      const arrData2 = strData2.split('&');
-      const objData = {};
-      for (const iterator of arrData2) {
-        objData[iterator.split('=')[0]] = iterator.split('=')[1];
-
-      }
-      console.log(objData);
+      };
+      const user: User = await this.usersRepository.findOne({ userName });
+      return user
 
 
     } catch (error) {
