@@ -21,7 +21,7 @@
 
             <h2>Wellcome to your page
                 {{user.firstName}}
-               
+
             </h2>
 
             <div class="d-info">
@@ -32,14 +32,14 @@
                         <h4>userName:</h4>
                         <h4 class="position-right">
                             {{ user.userName }}
-                            
+
                         </h4>
                     </div>
                     <div class="row-info ">
                         <h4>password:</h4>
                         <h4 class="position-right">
                             {{user.password}}
-                           
+
                         </h4>
 
                     </div>
@@ -48,14 +48,14 @@
                         <h4>lastName:</h4>
                         <h4 class="position-right">
                             {{user.lastName}}
-                           
+
                         </h4>
                     </div>
                     <div class="row-info ">
                         <h4>firstName:</h4>
                         <h4 class="position-right">
                             {{user.firstName}}
-                          
+
                         </h4>
                     </div>
                     <div class="row-info ">
@@ -64,7 +64,7 @@
 
                         <h4 class="position-right">
                             {{user.phoneNumber}}
-                           
+
                         </h4>
 
 
@@ -75,7 +75,7 @@
                         <h4>gender:</h4>
                         <h4 class="position-right">
                             {{user.gender }}
-                           
+
                         </h4>
 
                     </div>
@@ -110,18 +110,18 @@
 
                     <button id="btn-creat-article"
                         class="w-150px btn-creat-article btn btn-primary">creatArticle</button>
-                    <% if(user.role==='admin' ){%>
-                        <a href="/:role/dashboard/seeBloggers"> <button class="w-150px btn btn-primary">See All
-                                User</button></a>
-                        <a href="/:role/dashboard/seeComments"> <button class="w-150px btn btn-primary">See All
-                                Comments</button></a>
+                    {{#if (user.role === 'admin' ) }}
+                    <a href="/:role/dashboard/seeBloggers"> <button class="w-150px btn btn-primary">See All
+                            User</button></a>
+                    <a href="/:role/dashboard/seeComments"> <button class="w-150px btn btn-primary">See All
+                            Comments</button></a>
 
-                        <% } %>
+                    {{/if}}
 
                 </div>
                 <p style="display: none">
 
-                   {{ msg}}
+                    {{ msg}}
                 </p>
             </div>
 
@@ -177,28 +177,28 @@
 
                                     <h4 class="labels-update">gender:</h4>
                                     <div class="input-update-gender">
-                                        <% if(user.gender=='male' ){ %>
+                                        {{#if(user.gender=='male' )}}
 
-                                            <input class="form-check-input" type="radio" name="gender" id="male"
-                                                value="male" checked>
-                                            <label class="form-check-label" for="male">
-                                                male </label>
-                                            <input class="form-check-input" type="radio" name="gender" id="female"
-                                                value="female">
-                                            <label class="form-check-label" for="female">
-                                                female
-                                            </label>
-                                            <% }else{ %>
-                                                <input class="form-check-input" type="radio" name="gender" id="male"
-                                                    value="male" checked>
-                                                <label class="form-check-label" for="male">
-                                                    male </label>
-                                                <input class="form-check-input" type="radio" name="gender" id="female"
-                                                    value="female" checkedt>
-                                                <label class="form-check-label" for="female">
-                                                    female
-                                                </label>
-                                                <% } %>
+                                        <input class="form-check-input" type="radio" name="gender" id="male"
+                                            value="male" checked>
+                                        <label class="form-check-label" for="male">
+                                            male </label>
+                                        <input class="form-check-input" type="radio" name="gender" id="female"
+                                            value="female">
+                                        <label class="form-check-label" for="female">
+                                            female
+                                        </label>
+                                        {{else}}
+                                        <input class="form-check-input" type="radio" name="gender" id="male"
+                                            value="male" checked>
+                                        <label class="form-check-label" for="male">
+                                            male </label>
+                                        <input class="form-check-input" type="radio" name="gender" id="female"
+                                            value="female" checkedt>
+                                        <label class="form-check-label" for="female">
+                                            female
+                                        </label>
+                                        {{/if}}
 
                                     </div>
                                 </div>
@@ -261,11 +261,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
-  
-    Handlebars.registerPartial("dashboard",user,msg);
+
+    Handlebars.registerPartial("dashboard", user, msg);
 
 
-  
+
 </script>
 <script src="/js/main.js"></script>
 

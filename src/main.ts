@@ -12,7 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { bodyParser: false });
   app.useStaticAssets(join(__dirname, '..', "public"))
   app.setBaseViewsDir(join(__dirname, '..', 'views'))
-  hbs.registerPartials(join(__dirname + '..'+'/views/partials'));
+  hbs.registerPartials(join(__dirname , '..','/views/partials'));
   app.setViewEngine('hbs');
   app.useGlobalPipes(new ValidationPipe())
   await app.listen(3000)

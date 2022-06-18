@@ -30,7 +30,6 @@ export class UsersController {
 
         try {
             const result = await this.usersService.findOne(loginInfo)
-            console.log(result);
             return res.render('blogger/dashboard',{user:result,msg:'hello'})
 
         } catch (error) {
