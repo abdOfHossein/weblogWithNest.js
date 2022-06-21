@@ -13,8 +13,8 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', "public"))
   app.setBaseViewsDir(join(__dirname, '..', 'views'))
   hbs.registerPartials(join(__dirname , '..','/views/partials'));
+
   app.setViewEngine('hbs');
-  
   hbs.registerHelper('ifCond', function (v1:any, operator:any, v2:any, options:any) {
 
     switch (operator) {
@@ -42,6 +42,7 @@ async function bootstrap() {
             return options.inverse(this);
     }
 });
+
   app.useGlobalPipes(new ValidationPipe())
   await app.listen(3000)
 

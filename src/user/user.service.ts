@@ -11,20 +11,32 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) { }
-  async addUser(userInfo: User): Promise<User> {
+  async addUser(userInfo: User): Promise<User | Object> {
 
-    const strData = userInfo.toString();
-    const arrData = strData.split('&');
-    const objData = {};
-    for (const iterator of arrData) {
-      objData[iterator.split('=')[0]] = iterator.split('=')[1];
+    try {
+
+      const strData = userInfo.toString();
+      const arrData = strData.split('&');
+      let objData:any = {};
+      let err = {};
+      for (const iterator of arrData) {
+        objData[iterator.split('=')[0]] = iterator.split('=')[1];
+
+      }
+      const existUserName = await this.usersRepository.findOne({ userName: objData.userName });
+      if (existUserName) {
+        err['msg'] = 'this userName already existed'
+        console.log(err);
+        return err
+      }
+      const newUser: User = await this.usersRepository.save(objData);
+      console.log(newUser);
+      return newUser
+
+    } catch (error) {
+      console.log(`err of addUser in service:${error}`);
 
     }
-
-    const newUser: User = await this.usersRepository.save(objData);
-    console.log(newUser);
-
-    return newUser
 
   }
 

@@ -11,11 +11,23 @@ export class UsersController {
 
     @Post('register/page/doing')
     @UseInterceptors()
-    addUser(@Body() userInfo: User, @Res() res: Response) {
-        console.log(userInfo);
-        const user = this.usersService.addUser(userInfo);
-        res.render('loginPage', { msg: 'register ok' });
-        return
+    async addUser(@Body() userInfo: User, @Res() res: Response) {
+
+        try {
+
+            console.log(userInfo);
+            const result = await this.usersService.addUser(userInfo);
+            if ('msg' in result) {
+                return res.render('registerPage', { error: result['msg'] })
+            }
+
+            res.render('loginPage', { msg: 'register ok' });
+            return
+
+        } catch (error) {
+            console.log(`err of addUser in controller:${error}`);
+
+        }
 
     }
     @Get()
@@ -30,7 +42,7 @@ export class UsersController {
 
         try {
             const result = await this.usersService.findOne(loginInfo)
-            return res.render('blogger/dashboard',{user:result,msg:'hello'})
+            return res.render('blogger/dashboard', { user: result, msg: 'hello' })
 
         } catch (error) {
 
