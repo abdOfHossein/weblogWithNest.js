@@ -2,6 +2,7 @@ import { Controller, Post, Get, Body, Res, UseInterceptors, Req } from '@nestjs/
 import { User } from './user.entity';
 import { UsersService } from './user.service';
 import { Response, Request, raw } from 'express';
+import { CreatUserDto } from './isEmptyValidate';
 
 
 @Controller()
@@ -11,12 +12,13 @@ export class UsersController {
 
     @Post('register/page/doing')
     @UseInterceptors()
-    async addUser(@Body() userInfo: User, @Res() res: Response) {
+    async addUser(@Body() creatUserDto:CreatUserDto, @Res() res: Response) {
 
         try {
 
-            console.log(userInfo);
-            const result = await this.usersService.addUser(userInfo);
+           
+
+            const result = await this.usersService.addUser(creatUserDto);
             if ('msg' in result) {
                 return res.render('registerPage', { error: result['msg'] })
             }

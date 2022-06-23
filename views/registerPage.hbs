@@ -18,13 +18,13 @@
       <img class='img' src='/img/background.jpeg' />
       <div class='div-form-reg'>
         <div class='title'>
-          <h2>Resiter</h2>
+          <p>Resiter</p>
         </div>
         <form class='register-form' action='/register/page/doing' method='post'>
           <div class='content-reg-form'>
 
             <div>
-              <div class=''>
+              <div class='register-info'>
                 <label for='userName'>userName:</label>
                 <input
                   class='position-right'
@@ -34,62 +34,87 @@
                   placeholder='userName'
                 />
               </div>
-              <div>
+              <div class='error-msg'>
                 <p>
                   {{error}}
                 </p>
               </div>
             </div>
             <div class='form-group'>
-              <label for='password'>password:</label>
-              <input
-                class='position-right'
-                type='password'
-                id='password'
-                name='password'
-                placeholder='Password'
-              />
-              <p id='alarm-password'></p>
-            </div>
-
-            <div class='form-group'>
-              <label for='firstName'>firstName:</label>
-              <input
-                class='position-right'
-                type='text'
-                id='firstName'
-                name='firstName'
-                placeholder='firstName'
-              />
-              <p id='alarm-firstName'></p>
-            </div>
-            <div class='form-group'>
-              <label for='lastName'> lastName:</label>
-              <input
-                class='position-right'
-                type='text'
-                id='lastName'
-                name='lastName'
-                placeholder='lastName'
-              />
-              <p id='alarm-lastName'></p>
-            </div>
-            <div class='form-group'>
-              <label for='phoneNumber'>phoneNumber:</label>
-              <input
-                class='position-right'
-                type='tel'
-                id='phoneNumber'
-                name='phoneNumber'
-                placeholder='e.x: 09151234567'
-              />
-              <div>
-                <p id='alarm-phoneNumber'></p>
+              <div class='register-info'>
+                <label for='password'>password:</label>
+                <input
+                  class='position-right'
+                  type='password'
+                  id='password'
+                  name='password'
+                  placeholder='Password'
+                />
               </div>
-
+              <div class='error-msg'>
+                <p>
+                  {{error}}
+                </p>
+              </div>
             </div>
-            <h4 class='gender'>gender:</h4>
-            <div class='div-gender'>
+
+            <div class='form-group'>
+              <div class='register-info'>
+                <label for='firstName'>firstName:</label>
+                <input
+                  class='position-right'
+                  type='text'
+                  id='firstName'
+                  name='firstName'
+                  placeholder='firstName'
+                />
+              </div>
+              <div class='error-msg'>
+                <p>
+                  {{error}}
+                </p>
+              </div>
+            </div>
+            <div class='form-group'>
+              <div class='register-info'>
+                <label for='lastName'> lastName:</label>
+                <input
+                  class='position-right'
+                  type='text'
+                  id='lastName'
+                  name='lastName'
+                  placeholder='lastName'
+                />
+              </div>
+              <div class='error-msg'>
+                <p>
+                  {{error}}
+                </p>
+              </div>
+            </div>
+            <div class='form-group'>
+              <div class='register-info'>
+                <label for='phoneNumber'>phoneNumber:</label>
+                <input
+                  class='position-right'
+                  type='tel'
+                  id='phoneNumber'
+                  name='phoneNumber'
+                  placeholder='e.x: 09151234567'
+                />
+              </div>
+              <div class='error-msg'>
+                <p>
+                  {{error}}
+                </p>
+              </div>
+            </div>
+
+          <div class="div-gender"> 
+              <div class="title-gender ">
+               <hp>gender:</p>
+              </div>
+            <div class='select-gender'>
               <input
                 class='form-check-input'
                 type='radio'
@@ -111,16 +136,15 @@
               <label class='form-check-label' for='female'>
                 female
               </label>
-              <p id='alarm-gender'></p>
             </div>
+          </div>
             <div class='form-group'>
               <label for='img-reg'>put yor image</label>
               <input type='file' id='img-reg' name='avatar' />
               <p id='img-reg'></p>
             </div>
 
-          </div>
-          <div>
+          <div class="div-btns">
             <button id='btn-signUp' type='submit' class='btn btn-success'>Sign
               up</button>
             <button class='btn-back-login btn btn-primary'><a

@@ -2,6 +2,7 @@
 import { Injectable, Res } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreatUserDto } from './isEmptyValidate';
 import { User } from './user.entity';
 
 
@@ -11,7 +12,7 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) { }
-  async addUser(userInfo: User): Promise<User | Object> {
+  async addUser(userInfo:CreatUserDto): Promise<User | Object> {
 
     try {
 
@@ -23,12 +24,17 @@ export class UsersService {
         objData[iterator.split('=')[0]] = iterator.split('=')[1];
 
       }
-      const existUserName = await this.usersRepository.findOne({ userName: objData.userName });
-      if (existUserName) {
-        err['msg'] = 'this userName already existed'
-        console.log(err);
-        return err
-      }
+
+
+
+
+
+      // const existUserName = await this.usersRepository.findOne({ userName: objData.userName });
+      // if (existUserName) {
+      //   err['msg'] = 'this userName already existed'
+      //   console.log(err);
+      //   return err
+      // }
       const newUser: User = await this.usersRepository.save(objData);
       console.log(newUser);
       return newUser
