@@ -16,8 +16,6 @@ export class UsersController {
 
         try {
 
-           
-
             const result = await this.usersService.addUser(creatUserDto);
             if ('msg' in result) {
                 return res.render('registerPage', { error: result['msg'] })
