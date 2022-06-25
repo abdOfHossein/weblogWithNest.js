@@ -10,11 +10,12 @@ const path = require("path");
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { bodyParser: false });
-  app.useStaticAssets(join(__dirname, '..', "public"))
-  app.setBaseViewsDir(join(__dirname, '..', 'views'))
-  hbs.registerPartials(join(__dirname , '..','/views/partials'));
-
+  app.useStaticAssets(join(__dirname, '..', "public"));
   app.setViewEngine('hbs');
+  app.setBaseViewsDir(join(__dirname, '..','views'))
+  hbs.registerPartials(join(__dirname , '..','views/partials'));
+
+
   hbs.registerHelper('ifCond', function (v1:any, operator:any, v2:any, options:any) {
 
     switch (operator) {
