@@ -12,12 +12,7 @@ export class AppController {
     return { firstName: 'Behzad' };
   }
 
-  @Get('who')
-  who(@Req() req: Request, @Res() res: Response) {
 
-    console.log('behzad');
-    return this.appService.who();
-  }
 
   @Get('login/page')
   @Render('loginPage')

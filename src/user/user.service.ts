@@ -1,33 +1,26 @@
-
 import { Injectable, Res } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatUserDto } from './isEmptyValidate';
 import { User } from './user.entity';
 
-
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) { }
-  async addUser(userInfo:CreatUserDto): Promise<User | Object> {
-
+  ) {}
+  async addUser(userInfo: User): Promise<User | Object> {
     try {
-
       const strData = userInfo.toString();
       const arrData = strData.split('&');
-      let objData:any = {};
+      let objData: any = {};
       let err = {};
       for (const iterator of arrData) {
         objData[iterator.split('=')[0]] = iterator.split('=')[1];
-
       }
-
-
-
-
+      const output = JSON.stringify(objData);
+      console.log(`output===>${output}`);
 
       // const existUserName = await this.usersRepository.findOne({ userName: objData.userName });
       // if (existUserName) {
@@ -35,48 +28,38 @@ export class UsersService {
       //   console.log(err);
       //   return err
       // }
-      const newUser: User = await this.usersRepository.save(objData);
-      console.log(newUser);
-      return newUser
+      // const newUser: User = await this.usersRepository.save(objData);
 
+      // console.log(`new user===>${JSON.stringify(newUser)}`);
+
+      return output;
     } catch (error) {
       console.log(`err of addUser in service:${error}`);
-
     }
-
   }
-
 
   async findAll(): Promise<User[]> {
     const users = await this.usersRepository.find();
     console.log(users);
 
-    return users
+    return users;
   }
-
 
   async findOne(loginData: any): Promise<any> {
     try {
-
       const strData = loginData.toString();
       const arrData = strData.split('&');
       let userName = '';
       for (const iterator of arrData) {
-
         if (iterator.split('=')[0] === 'userName') {
-          userName = iterator.split('=')[1]
+          userName = iterator.split('=')[1];
         }
-
-      };
+      }
       const user: User = await this.usersRepository.findOne({ userName });
-      return user
-
-
+      return user;
     } catch (error) {
-
-      throw error
+      throw error;
     }
-
   }
 
   async remove(id: string): Promise<void> {

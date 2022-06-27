@@ -17,29 +17,21 @@ import { CreatUserDto } from './isEmptyValidate';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('who')
-  @Render('index')
-  firstName() {
-    return { firstName: '' };
-  }
-
-  @Get('who')
-  who(@Res() res: Response): any {
-    console.log('behzad');
-
-    return 'behzad';
-  }
-
   @Post('register/page/doing')
   @UseInterceptors()
-  async addUser(@Body() creatUserDto: CreatUserDto, @Res() res: Response) {
+  async addUser(@Body() creatUserDto: User, @Res() res: Response) {
     try {
+      console.log('befor result');
+      console.log(creatUserDto);
       const result = await this.usersService.addUser(creatUserDto);
-      if ('msg' in result) {
-        return res.render('registerPage', { error: result['msg'] });
-      }
+      console.log(`result===>${result}`);
 
-      res.render('loginPage', { msg: 'register ok' });
+      // if ('msg' in result) {
+      //   return res.render('registerPage', { error: result['msg'] });
+      // }
+      console.log('after result');
+      res.send('ok')
+      // res.render('loginPage', { msg: 'register ok' });
       return;
     } catch (error) {
       console.log(`err of addUser in controller:${error}`);
@@ -50,6 +42,7 @@ export class UsersController {
   findAll() {
     return this.usersService.findAll();
   }
+
   @Post('login/page/doing')
   @UseInterceptors()
   async goDashboard(@Body() loginInfo: any, @Res() res: Response) {

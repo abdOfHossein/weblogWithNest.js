@@ -12,27 +12,24 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
-    @IsEmpty()
-    @Column()
-    password: string
-
-    @IsEmpty()
     @Column()
     userName: string
 
-    @IsEmpty()
+    @Column({default:'123'})
+    password: string
+
     @Column()
     firstName: string
 
-    @IsEmpty()
+  
     @Column()
     lastName: string
 
-    @IsEmpty()
+ 
     @Column()
     gender: string
 
-    @IsEmpty()
+   
     @Column()
     phoneNumber: string
 
