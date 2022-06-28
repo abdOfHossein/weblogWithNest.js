@@ -21,14 +21,18 @@ export class UsersController {
   @UseInterceptors()
   async addUser(@Body() creatUserDto: CreatUserDto, @Res() res: Response) {
     try {
+      console.log(creatUserDto);
+
       const result = await this.usersService.addUser(creatUserDto);
       console.log(`result===>${result}`);
+
+      return res.json(JSON.stringify(result));
 
       // if ('msg' in result) {
       //   return res.render('registerPage', { error: result['msg'] });
       // }
-      res.render('loginPage', { msg: 'register ok' });
-      return;
+
+      // return res.render('loginPage', { msg: 'register ok' });
     } catch (error) {
       console.log(`err of addUser in controller:${error}`);
     }

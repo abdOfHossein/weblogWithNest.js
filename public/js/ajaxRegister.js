@@ -1,10 +1,10 @@
 $('#btn-signUp').click(function (e) {
   e.preventDefault();
 
-  let isMale = document.getElementById('male').checked;
-  let isFemale = document.getElementById('female').checked;
+  let isMale = $('#male').is(':checked');
+  let isFemale = $('#female').is(':checked');
   console.log(isMale);
-  let gender = null;
+  let gender = '';
 
   if (isMale) {
     gender = 'male';
@@ -13,35 +13,54 @@ $('#btn-signUp').click(function (e) {
   }
 
   let objRegisterInfo = {
-    userName: document.getElementById('userName').value,
-    password: document.getElementById('password').value,
-    firstName: document.getElementById('firstName').value,
-    lastName: document.getElementById('lastName').value,
-    phoneNumber: document.getElementById('phoneNumber').value,
+    userName: $('#userName').val(),
+    password: $('#password').val(),
+    firstName: $('#firstName').val(),
+    lastName: $('#lastName').val(),
+    phoneNumber: $('#phoneNumber').val(),
     gender,
   };
 
-  let data = JSON.stringify(objRegisterInfo);
+console.log(JSON.stringify(objRegisterInfo));
 
   $.ajax({
     type: 'POST',
     url: '/register/page/doing',
-    data,
+    data:JSON.stringify(objRegisterInfo),
     dataType: 'json',
+    contentType: "application/json; charset=utf-8",
     success: function (response, statusCode) {
-      console.log(`response===>${response}`);
-      console.log(`statusCode===>${statusCode}`);
-      //     if (response & statusCode==400) {
-      //      let errUserName=$('#err-userName');
-      // errUserName.html()='response.message[0]'
-
-      //       return;
-      //     }
+      if (response) {
+        console.log(`response===>${response}`);
+        console.log(`statusCode===>${statusCode}`);
+        return;
+      }
     },
     error: function (xhr, ajaxOptions, thrownError) {
-      alert(xhr.status);
-      alert(thrownError)
-      console.log('helloF');
+      if (xhr.status == 400) {
+        let objMsgErr = JSON.parse(xhr.responseText);
+        let userNameErr = $('#userName-err'),
+          passwordErr = $('#password-err'),
+          firstNameErr = $('#firstName-err'),
+          lastNameErr = $('#lastName-err'),
+          phoneNumberErr = $('#phoneNumber-err');
+
+        for (const iterator of objMsgErr['message']) {
+          let determiner = iterator.split(' ')[0];
+          console.log(determiner);
+          if (determiner === 'userName') {
+            userNameErr.text(iterator);
+          } else if (determiner === 'password') {
+            passwordErr.text(iterator);
+          } else if (determiner === 'firstName') {
+            firstNameErr.text(iterator);
+          } else if (determiner === 'lastName') {
+            lastNameErr.text(iterator);
+          } else if (determiner === 'phoneNumber') {
+            phoneNumberErr.text(iterator);
+          }
+        }
+      }
     },
   });
 });

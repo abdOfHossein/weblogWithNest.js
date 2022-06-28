@@ -10,14 +10,13 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) {}
-  async addUser(userInfo: CreatUserDto): Promise<User | Object> {
+  async addUser(userInfo: CreatUserDto): Promise<User> {
     try {
-
-      console.log(userInfo);
+      console.log(`userInfo===>${JSON.stringify(userInfo)}`);
       // const err = {};
-      const existUserName = await this.usersRepository.findOne({
-        userName: userInfo.userName,
-      });
+      // const existUserName = await this.usersRepository.findOne({
+      //   userName: userInfo.userName,
+      // });
 
       // if (existUserName) {
       //   err['msg'] = 'this userName already existed';
@@ -26,8 +25,7 @@ export class UsersService {
       // }
       const newUser: User = await this.usersRepository.save(userInfo);
 
-      console.log(`new user===>${newUser}`);
-
+      console.log(`new user===>${JSON.stringify(newUser)}`);
       return newUser;
     } catch (error) {
       console.log(`err of addUser in service:${error}`);
