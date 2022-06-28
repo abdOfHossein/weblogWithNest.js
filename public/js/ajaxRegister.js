@@ -1,4 +1,6 @@
-function makeRequest() {
+$('#btn-signUp').click(function (e) {
+  e.preventDefault();
+
   let isMale = document.getElementById('male').checked;
   let isFemale = document.getElementById('female').checked;
   console.log(isMale);
@@ -9,7 +11,8 @@ function makeRequest() {
   } else if (isFemale) {
     gender = 'female';
   }
-  const registerInfo = {
+
+  let objRegisterInfo = {
     userName: document.getElementById('userName').value,
     password: document.getElementById('password').value,
     firstName: document.getElementById('firstName').value,
@@ -17,34 +20,28 @@ function makeRequest() {
     phoneNumber: document.getElementById('phoneNumber').value,
     gender,
   };
-  console.log(registerInfo);
 
-  fetch('http://localhost:3000/register/page/doing', {
-    method: 'POST',
-    body: JSON.stringify({
-      registerInfo,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
+  let data = JSON.stringify(objRegisterInfo);
+
+  $.ajax({
+    type: 'POST',
+    url: '/register/page/doing',
+    data,
+    dataType: 'json',
+    success: function (response, statusCode) {
+      console.log(`response===>${response}`);
+      console.log(`statusCode===>${statusCode}`);
+      //     if (response & statusCode==400) {
+      //      let errUserName=$('#err-userName');
+      // errUserName.html()='response.message[0]'
+
+      //       return;
+      //     }
     },
-  })
-    .then((res) => {
-      console.log(res);
-      return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-      return data;
-    })
-    .catch((err) => {
-      console.log(`err of fetch register:${err}`);
-    });
-  return;
-};
-
-
-
-
-
-
-document.getElementById('btn-signUp').onsubmit = makeRequest;
+    error: function (xhr, ajaxOptions, thrownError) {
+      alert(xhr.status);
+      alert(thrownError)
+      console.log('helloF');
+    },
+  });
+});

@@ -19,19 +19,15 @@ export class UsersController {
 
   @Post('register/page/doing')
   @UseInterceptors()
-  async addUser(@Body() creatUserDto: User, @Res() res: Response) {
+  async addUser(@Body() creatUserDto: CreatUserDto, @Res() res: Response) {
     try {
-      console.log('befor result');
-      console.log(creatUserDto);
       const result = await this.usersService.addUser(creatUserDto);
       console.log(`result===>${result}`);
 
       // if ('msg' in result) {
       //   return res.render('registerPage', { error: result['msg'] });
       // }
-      console.log('after result');
-      res.send('ok')
-      // res.render('loginPage', { msg: 'register ok' });
+      res.render('loginPage', { msg: 'register ok' });
       return;
     } catch (error) {
       console.log(`err of addUser in controller:${error}`);
