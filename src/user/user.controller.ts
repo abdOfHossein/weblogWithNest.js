@@ -11,7 +11,7 @@ import {
 import { User } from './user.entity';
 import { UsersService } from './user.service';
 import { Response, Request, raw } from 'express';
-import { CreatUserDto } from './isEmptyValidate';
+import { CreatUserDto } from './creat-user.dto';
 
 @Controller()
 export class UsersController {
@@ -21,13 +21,12 @@ export class UsersController {
   @UseInterceptors()
   async addUser(@Body() creatUserDto: CreatUserDto, @Res() res: Response) {
     try {
-      console.log(creatUserDto);
+      console.log('hi');
 
       const result = await this.usersService.addUser(creatUserDto);
-      console.log(`result===>${result}`);
 
-      return res.json(JSON.stringify(result));
-
+      res.render('loginPage.hbs', { msg: 'you register succussfully' });
+      return;
       // if ('msg' in result) {
       //   return res.render('registerPage', { error: result['msg'] });
       // }

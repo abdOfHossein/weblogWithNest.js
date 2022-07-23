@@ -1,39 +1,38 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { IsEmail, IsNotEmpty, IsEmpty } from 'class-validator';
 
 export enum Gender {
-    'male',
-    'female',
-    'other'
+  male='male',
+  female='female',
+  other='other',
 }
 @Entity()
 export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number
+  @Column()
+  userName: string;
 
-    @Column()
-    userName: string
+  @Column()
+  password: string;
 
-    @Column({default:'123'})
-    password: string
+  @Column()
+  firstName: string;
 
-    @Column()
-    firstName: string
+  @Column()
+  lastName: string;
 
-  
-    @Column()
-    lastName: string
+  @Column({
+    type: 'enum',
+    enum: Gender,
+    default: Gender.male
+  })
+  gender: Gender;
 
- 
-    @Column()
-    gender: string
+  @Column()
+  phoneNumber: string;
 
-   
-    @Column()
-    phoneNumber: string
-
-    @Column({ default: false })
-    isAdmin: boolean
-
+  @Column({ default: false })
+  isAdmin: boolean;
 }

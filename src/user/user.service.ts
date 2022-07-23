@@ -1,7 +1,7 @@
 import { Injectable, Res } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreatUserDto } from './isEmptyValidate';
+import { CreatUserDto } from './creat-user.dto';
 import { User } from './user.entity';
 
 @Injectable()
@@ -12,7 +12,8 @@ export class UsersService {
   ) {}
   async addUser(userInfo: CreatUserDto): Promise<User> {
     try {
-      console.log(`userInfo===>${JSON.stringify(userInfo)}`);
+      console.log(userInfo);
+      
       // const err = {};
       // const existUserName = await this.usersRepository.findOne({
       //   userName: userInfo.userName,
@@ -23,6 +24,9 @@ export class UsersService {
       //   console.log(err);
       //   return err;
       // }
+ 
+
+
       const newUser: User = await this.usersRepository.save(userInfo);
 
       console.log(`new user===>${JSON.stringify(newUser)}`);

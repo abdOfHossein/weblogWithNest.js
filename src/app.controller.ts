@@ -6,13 +6,6 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('index')
-  @Render('index')
-  firstName() {
-    return { firstName: 'Behzad' };
-  }
-
-
 
   @Get('login/page')
   @Render('loginPage')
