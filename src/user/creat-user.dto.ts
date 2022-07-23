@@ -1,7 +1,8 @@
-import { IsEmail, IsNotEmpty, IsEmpty } from 'class-validator';
+import { IsNotEmpty, Validate } from 'class-validator';
+import { IsUnique } from './user.validate';
 
 export class CreatUserDto {
-  
+  @Validate(IsUnique, { message: 'username already existed!!!' })
   @IsNotEmpty()
   userName: string;
 

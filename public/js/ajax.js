@@ -1,6 +1,6 @@
 $('#btn-signUp').click(function (e) {
   e.preventDefault();
-
+  alert('hi behy');
   let isMale = $('#male').is(':checked');
   let isFemale = $('#female').is(':checked');
   let gender = '';
@@ -55,6 +55,8 @@ $('#btn-signUp').click(function (e) {
       // }
     },
     error: function (xhr, ajaxOptions, thrownError) {
+      alert('i am i err');
+      alert(xhr.status);
       userNameErr.text(null);
       passwordErr.text(null);
       firstNameErr.text(null);
@@ -80,6 +82,7 @@ $('#btn-signUp').click(function (e) {
         }
       }
       if (xhr.status == 201) {
+        alert(xhr.responseText);
         let res = xhr.responseText;
         let resgiterPage = $('#registerPage');
         let template = Handlebars.compile(res);

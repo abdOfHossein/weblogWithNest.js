@@ -43,17 +43,17 @@ export class UsersService {
     return users;
   }
 
-  async findOne(loginData: any): Promise<any> {
+  async findOne(userName: any): Promise<any> {
     try {
-      const strData = loginData.toString();
-      const arrData = strData.split('&');
-      let userName = '';
-      for (const iterator of arrData) {
-        if (iterator.split('=')[0] === 'userName') {
-          userName = iterator.split('=')[1];
-        }
-      }
-      const user: User = await this.usersRepository.findOne({ userName });
+      // const strData = loginData.toString();
+      // const arrData = strData.split('&');
+      // let userName = '';
+      // for (const iterator of arrData) {
+      //   if (iterator.split('=')[0] === 'userName') {
+      //     userName = iterator.split('=')[1];
+      //   }
+      // }
+      const user: User = await this.usersRepository.findOne({where:{ userName }});
       return user;
     } catch (error) {
       throw error;
